@@ -77,17 +77,61 @@ Before you begin, ensure you have the following installed on your Linux system:
 
 ### Installation
 
-1.  **Clone the Repository:**
+1.  **Follow all steps:**
 
     ```bash
-    git clone [https://github.com/yourusername/your-repo.git](https://github.com/yourusername/your-repo.git)
-    cd your-repo
+
+    # this script remove all container and images - USE ONLY in a LAB SYSTEM.
+    docker container rm -f $(docker container ls -qa)
+    docker image rm -f $(docker image ls -q)
+
+    mkdir /docker/jenkins -p
+    cd /docker/jenkins
+    # create/copy template for Dockerfile use the file from this github
+    vi Dockerfile
+
+    # login Oracle registry - I used oracle linux - create the user www.oracle.com - register
+    docker login container-registry.oracle.com -u user@example.com -p passforthisuser
+
+    # build the image locally
+    docker build -t jenkins_oracle_linux -f Dockerfile .
+
+    # Run the image as container
+    docker run -d -p 8080:8080 -p 50000:50000 --restart=on-failure --name jenkins_oracle_linux jenkins_oracle_linux 
+
+    # Execute the command inside of a running container
+    docker exec --user jenkins -it jenkins_oracle_linux /bin/bash 
+
     ```
 
-2.  **(If applicable) Create necessary directories:** If your Dockerfile or application expects certain directories (e.g., for data persistence), create them now.  For example:
+2.  **The output will be similar:** 
 
     ```bash
-    mkdir data  # Create a 'data' directory
+    [root@srvfedoranfs jenkins]#docker images
+    REPOSITORY             TAG       IMAGE ID       CREATED         SIZE
+    jenkins_oracle_linux   latest    ebb85e71f177   9 minutes ago   1.92GB
+
+    [root@srvfedoranfs jenkins]#docker ps 
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+
+    [root@srvfedoranfs jenkins]#docker run -d -p 8080:8080 -p 50000:50000 --restart=on-failure --name jenkins_oracle_linux jenkins_oracle_linux
+    7653441da6087b3516b2a4686d791416a52819411c126146b664330c2051ae05
+
+
+    [root@srvfedoranfs jenkins]#docker ps 
+    CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                              NAMES
+    7653441da608   jenkins_oracle_linux   "/usr/bin/jenkins --…"   8 seconds ago   Up 7 seconds   0.0.0.0:8080->8080/tcp, 0.0.0.0:50000->50000/tcp   jenkins_oracle_linux
+
+    [root@srvfedoranfs jenkins]#docker exec --user jenkins -it jenkins_oracle_linux /bin/bash 
+    bash-4.4$ 
+    bash-4.4$ id
+    uid=998(jenkins) gid=995(jenkins) groups=995(jenkins)
+    bash-4.4$ pwd
+    /jenkins
+    bash-4.4$ exit
+    exit
+    [root@srvfedoranfs jenkins]#
     ```
 
 ## Usage
@@ -108,17 +152,44 @@ There are two main ways to create and run the Docker container: using a `Dockerf
 
     ```bash
     docker build -t your-image-name .  # The '.' indicates the Dockerfile is in the current directory
+
+    # this script remove all container and images - USE ONLY in a LAB SYSTEM.
+    docker container rm -f $(docker container ls -qa)
+    docker image rm -f $(docker image ls -q)
+
+    mkdir /docker/jenkins -p
+    cd /docker/jenkins
+    # create/copy template for Dockerfile use the file from this github
+    vi Dockerfile
+
+    # build the image locally
+    docker build -t jenkins_oracle_linux -f Dockerfile .
+    
     ```
     Replace `your-image-name` with a descriptive name for your image (e.g., `my-app-image`).
 
 2.  **Run the Container:**
 
     ```bash
-    docker run -p 8080:8080 -v data:/app/data your-image-name
+    docker run -d -p 8080:8080 -p 50000:50000 --restart=on-failure --name jenkins_oracle_linux jenkins_oracle_linux 
     ```
 
     *   `-p 8080:8080`: Maps port 8080 on the host to port 8080 in the container (change if your application uses a different port).
-    *   `-v data:/app/data`: Mounts a volume. This maps the `data` directory on your host to `/app/data` inside the container.  This is crucial for data persistence.  If your application doesn't need persistent storage, you can omit the `-v` flag.
+    *   `-v data:/app/data`: Mounts a volume. This maps the `data` directory on your host to `/app/data` inside the container.
+    *   This is crucial for data persistence.  If your application doesn't need persistent storage, you can omit the `-v` flag.
+  
+      # This will use current path for jenkins work_dir 
+    ```bash
+      docker run -d -p 8080:8080 -p 50000:50000 --restart=on-failure -v /docker/jenkins:/jenkins --name jenkins jenk 
+    ```
+
+3.  **Check process inside of a running container:**
+
+    ```bash
+    docker exec --user jenkins -it jenkins_oracle_linux /bin/bash 
+    ```
+
+
 
 #### Using Docker Compose
 
