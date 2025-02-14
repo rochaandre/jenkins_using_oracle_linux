@@ -1,0 +1,15 @@
+services:
+  jenkins_oracle_linux:
+    build:
+      context: .              # Current directory (where your Dockerfile is)
+      dockerfile: Dockerfile  # Specify the Dockerfile name
+    container_name: jenkins_oracle_linux
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    restart: on-failure
+    volumes:
+      - jenkins_home:/var/lib/jenkins
+
+volumes:
+  jenkins_home:
