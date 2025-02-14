@@ -212,6 +212,7 @@ There are two main ways to create and run the Docker container: using a `Dockerf
     volumes:
       data: # Named volume for data persistence
     ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 2.  **Run with Docker Compose:**
 
@@ -229,6 +230,15 @@ There are two main ways to create and run the Docker container: using a `Dockerf
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+3.  **Check if all plugins are installed:**
+
+    ```bash
+     http://yourhostdockeraddress:8080/manage/pluginManager/installed
+    ```
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Repository Structure
 
