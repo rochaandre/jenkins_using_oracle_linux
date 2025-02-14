@@ -14,6 +14,7 @@ Install Jenkins and tutorial for pipelines
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 [![Contributors][contributors-shield]][contributors-url]
+
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -196,6 +197,7 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 ### Top contributors:
+[![Contributors][contributors-shield]][contributors-url]
 
 <a href="https://github.com/othneildrew/Best-README-Template/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=othneildrew/Best-README-Template" alt="contrib.rocks image" />
