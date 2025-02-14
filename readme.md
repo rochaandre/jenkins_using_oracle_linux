@@ -2,6 +2,8 @@
 
 This repository provides a streamlined approach to deploying Jenkins, the popular open-source automation server, within a Docker container.  This method simplifies Jenkins setup, management, and ensures consistent execution across different environments.  This README focuses specifically on the repository's GitHub-related information, including commit history, forks, and other relevant details.  For deployment and usage instructions, please see [DEPLOYMENT.md](DEPLOYMENT.md).
 
+This is a docker jenkins deploy using oracle linux
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/rochaandre/jenkins)](https://github.com/rochaandre/jenkins/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/rochaandre/jenkins)](https://github.com/rochaandre/jenkins/network/members)
