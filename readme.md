@@ -13,6 +13,8 @@ This is a docker jenkins deploy using oracle linux
 ## Table of Contents
 
 
+
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -236,6 +238,7 @@ There are two main ways to create and run the Docker container: using a `Dockerf
      http://yourhostdockeraddress:8080/manage/pluginManager/installed
     ```
 
+<img src="images/screen_20250214144744.jpg" width="800">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
