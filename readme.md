@@ -139,9 +139,9 @@ Before you begin, ensure you have the following installed on your Linux system:
 This section explains how to create and run your application using Docker.
 
 ### Login Docker Oracle Registry
-
+  ```bash
 docker login container-registry.oracle.com -u username@example.com -p passwordforthisusername
-
+```
 ### Docker Container Creation
 
 There are two main ways to create and run the Docker container: using a `Dockerfile` directly or using a `docker-compose.yml` file.
@@ -166,7 +166,7 @@ There are two main ways to create and run the Docker container: using a `Dockerf
     docker build -t jenkins_oracle_linux -f Dockerfile .
     
     ```
-    Replace `your-image-name` with a descriptive name for your image (e.g., `my-app-image`).
+ 
 
 2.  **Run the Container:**
 
@@ -178,7 +178,9 @@ There are two main ways to create and run the Docker container: using a `Dockerf
     *   `-v data:/app/data`: Mounts a volume. This maps the `data` directory on your host to `/app/data` inside the container.
     *   This is crucial for data persistence.  If your application doesn't need persistent storage, you can omit the `-v` flag.
   
-      # This will use current path for jenkins work_dir 
+
+    **This will use current path for jenkins work_dir** 
+
     ```bash
       docker run -d -p 8080:8080 -p 50000:50000 --restart=on-failure -v /docker/jenkins:/jenkins --name jenkins jenk 
     ```
@@ -220,12 +222,6 @@ There are two main ways to create and run the Docker container: using a `Dockerf
     ```bash
     docker-compose down
     ```
-
-[Add more detailed usage instructions specific to your application here.  Include examples of how to interact with the running container, any configuration options, etc.]
-
-## Roadmap (Optional)
-
-[Describe your plans for future development here.]
 
 
 
