@@ -94,6 +94,10 @@ Before you begin, ensure you have the following installed on your Linux system:
 
 This section explains how to create and run your application using Docker.
 
+### Login Docker Oracle Registry
+
+docker login container-registry.oracle.com -u username@example.com -p passwordforthisusername
+
 ### Docker Container Creation
 
 There are two main ways to create and run the Docker container: using a `Dockerfile` directly or using a `docker-compose.yml` file.
